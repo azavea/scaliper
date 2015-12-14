@@ -10,7 +10,6 @@ trait ConsoleReport extends Benchmarks {
   }
 }
 
-
 case class LinearTranslation(in1: Double, out1: Double, in2: Double, out2: Double) {
   val denom = in1 - in2
   val m = (out1 - out2) / denom

@@ -2,7 +2,8 @@ package scaliper
 
 import scaliper._
 
-import scala.collection.JavaConversions._
+import spray.json._
+import spray.json.DefaultJsonProtocol._
 
 /** Contains measurements of duration in nanoseconds */
 case class MeasurementSet(measurements: List[Double]) {
@@ -19,3 +20,15 @@ case class MeasurementSet(measurements: List[Double]) {
 
 }
 
+object MeasurementSet {
+  implicit object MeasurementSetFormat extends RootJsonFormat[MeasurementSet] {
+    def write(ms: MeasurementSet): JsValue =
+      JsObject("measurements" -> ms.measurements.toJson)
+
+    def read(value: JsValue): MeasurementSet =
+      value.asJsObject.getFields("measurements") match {
+        case Seq(measurements) => MeasurementSet(measurements.convertTo[List[Double]])
+        case _ => throw new DeserializationException(s"Expected measurement JSON, got ${value.compactPrint}")
+      }
+  }
+}

@@ -1,5 +1,3 @@
-
-
 project/boot
 project/plugins/project
 project/plugins/target
@@ -14,6 +12,7 @@ target
 *.jar
 *.crc
 _SUCCESS
+*.db
 
 *.pyc
 .project
