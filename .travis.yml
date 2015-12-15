@@ -1,0 +1,46 @@
+sudo: false
+
+env:
+  global:
+  - secure: T8ujuzdKco8ID5NjMBeYYINqIfAQ4+pqzs/ooP7shYd600WQ2n4CjtJ29ZTql2dfPMPxlm+jMYRNj23UaMcczi7+USACrr9bvWCiwYW6D3DzfXD7SUtj97T6abgoeH9CF6hUvOcj2hvz11Im5GA8yke+GFcuJf9AK0AqcvmmWe0RS0/m2cRwYEC1U+7HzfyUxTVzK9Dxl40ZNnDsLxxuzLbZ9vOq9SBBqTiloBNli9d4Qg3zBOHRzD8ZxJL2LG+roz3EaNo0Nk2cHQkUo3dcLTKHdf7+8luivo4bezAZTicnczv90LLDo4S/7ODJ+xa8aBG+Nk9ay148KDvJFZJlmfZ08ygsdXDibojZGUIGcaSVhxh0z9hUTGUTDJSzPgmrVvOdNoSf9x5rFLL4vHrBd0sZMAikuAPMuvPgA05m1cibfyP01lUf7ZOfkmv33UMngpOin15eL+C7bSVIF2pRv6Wxi2wPs//CwNaO+6LG5KbbURiZJKyCXBaZOLLoF5lFtV0e/S2E9F3Cvul0MjzFNG8nWBYfAyDL1HmwNJIwS/ve8fMQYvHdvmWjSCcMdFtkpfGuA+GBqADgUM8H0K7AofnLUoyk1vG1B89f47eRJnDonIPsFYOh3fYEQu6Z9piFiPIoe8fheGLUdCosaozko8OOCi42ixQG4d6WgV6yuUk=
+  - secure: vM++Pl2dchM1p3YIK6LU5rLZ8+mUR0/8P3gI9aH4eiULGqFCeNm8pp6FPu1SZ4gUwf6+kG3imVp81+q3YLNN20ol86EVguyfvcmpkxWdbr59WIqzUEJoSS/vHWfYi/XdxgylZ3mpecx6h1YBcgXe2/KVWW8wJLSwhNy7zEPZHKUxzA3o4lRoI5Ha3cI6sRmHqnraTrsYz9SvDKwQ2mIpj5IicjfdD9TQ3AqxucK5JTYZR3rYrV3A4SVIcOBI+ilf+gdI+rphPQqK2oVhQhBYzjPqUJnfFeWLi07n0+/wRc+jCPBAXCmTNhCrfGmWKXEScsE8hcfOYlAw9eYuCWS20HMRKqdT4bpWRtVgF2o4mTt1/b2cKT4vTs/ffrlEUMF4cyG1DqmCVLxhFROv9mjXImDKq+19oC3tCTFXJML8Jns2g9FRb1b462R3ZyFqvYGGQi5GvQj0xd5AV9W5/irv94RzOr5fKzUIs2YHmptE2m8TIEeoUmCRgXrlySDIeh5qehbRBCCyZzGS/FsvKCMYb2tMwqyAMGuRzcA1ycOmKFFv/UJZtnrGBi4R1Xej62wWsF1WZO/niKaD2P3KUTqlDHpT2Z88gUaMrgFNPEAqL7a6LDI1VpgzyjWJ6vpR+lrCOSWjaK1LD5ONl+hFKp2WXUcj6Eo5GJ3o8p6Rm3SfO8I=
+
+
+language: scala
+
+jdk:
+- openjdk7
+- oraclejdk8
+
+scala:
+- 2.10.5
+- 2.11.5
+
+cache:
+  directories:
+  - $HOME/.ivy2
+  - $HOME/.sbt
+
+script:
+- ./buildall.sh
+
+notifications:
+  email:
+    recipients:
+    - lossyrob@gmail.com
+
+before_deploy:
+- export SCALIPER_VERSION_SUFFIX="-${TRAVIS_COMMIT:0:7}"
+
+deploy:
+- provider: script
+  script: .travis/deploy.sh
+  skip_cleanup: true
+  on:
+    repo: azavea/scaliper
+    branch: master
+    jdk: oraclejdk7
+    scala: 2.10.5
+
+after_deploy:
+- rm -f "${HOME}/.bintray/.credentials"
