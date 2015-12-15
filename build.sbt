@@ -48,3 +48,7 @@ lazy val root = Project("scaliper", file("."))
 lazy val server = Project("server", file("server"))
   .settings(commonSettings: _*)
   .dependsOn(root)
+
+lazy val examples = Project("examples", file("examples"))
+  .settings(commonSettings: _*)
+  .dependsOn(root)
