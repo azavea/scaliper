@@ -8,16 +8,15 @@ trait Benchmark {
    *      value to prevent the runtime from optimizing away the code under test.
    *      Such an accumulator value can be returned here.
    */
-  def run(reps: Int): Object = {
+  def run(reps: Int): Unit = {
     var i = 0
-    var x: Object = null
-    while (i < reps) { x = run; i += 1 }
-    x
+    while (i < reps) { run; i += 1 }
+
   }
 
   def setUp(): Unit = { }
 
-  def run(): Object
+  def run(): Unit
 
   def tearDown(): Unit = { }
 }

@@ -29,7 +29,7 @@ class SimpleBenchmarks extends Benchmarks with ConsoleReport {
           ints.foreach { i =>
             ints(0) = i
           }
-          ints
+//          ints
         }
       }
     }

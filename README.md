@@ -2,7 +2,7 @@
 
 Scaliper is a microbenchmarking tool based on [Google's Caliper](https://github.com/google/caliper). The codebase conatins a partial port from Java to Scala of some of Caliper's measurment code, as well as the method of running benchmarks in a seperate JVM and the warm up routines, based on an early version of Caliper. It contains methods of declaring benchmarks in test suites, so that they can be run as part of the ScalaTest framework.
 
-###
+### Adding to your project
 
 Scaliper exists in a bintray repository. This is a new project and so there will potentially be many updates, but each travis build of master
 will publish an artifact that can be referenced by the first 7 characters of the commit hash. You can find the latest published binary here: https://bintray.com/azavea/maven/scaliper/view
@@ -67,12 +67,7 @@ class ReadmeExampleBenchmarks extends Benchmarks with ConsoleReport {
           foo = new Foo(1010)
         }
 
-        def run() = {
-          foo.thisTakesTime(arr)
-
-          // Always return something; this will help prevent the JVM from optimizing your function body away
-          arr
-        }
+        def run() = foo.thisTakesTime(arr)
 
         override def tearDown() = {
           foo.stop()
@@ -92,10 +87,7 @@ class ReadmeExampleBenchmarks extends Benchmarks with ConsoleReport {
           bar = new Bar(510)
         }
 
-        def run() = {
-          bar.thisTakesLessTime(arr)
-          arr
-        }
+        def run() = bar.thisTakesLessTime(arr)
       }
     }
   }
