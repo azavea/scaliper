@@ -71,12 +71,7 @@ class ReadmeExampleBenchmarks extends Benchmarks with ConsoleReport {
           foo = new Foo(1010)
         }
 
-        def run() = {
-          foo.thisTakesTime(arr)
-
-          // Always return something; this will help prevent the JVM from optimizing your function body away
-          arr
-        }
+        def run() = foo.thisTakesTime(arr)
 
         override def tearDown() = {
           foo.stop()
@@ -96,10 +91,7 @@ class ReadmeExampleBenchmarks extends Benchmarks with ConsoleReport {
           bar = new Bar(510)
         }
 
-        def run() = {
-          bar.thisTakesLessTime(arr)
-          arr
-        }
+        def run() = bar.thisTakesLessTime(arr)
       }
     }
   }
