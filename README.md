@@ -1,6 +1,6 @@
 # Scaliper
 
-[ ![Build Status] [travis-image] ] [travis] [ ![License] [license-image] ] [license]
+[ ![Build Status] [travis-image] ] [travis] [ ![License] [license-image] ] [license] [ ![Download] [bintray-version-image] ] [bintray-version]
 
 ## Overview 
 
@@ -123,3 +123,6 @@ Running benchmarks for Doing things that take time...
 
 [license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
 [license]: http://www.apache.org/licenses/LICENSE-2.0
+
+[bintray-version-image]: https://api.bintray.com/packages/azavea/maven/scaliper/images/download.svg
+[bintray-version]: https://bintray.com/azavea/maven/scaliper/_latestVersion
