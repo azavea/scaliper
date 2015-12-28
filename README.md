@@ -20,6 +20,12 @@ libraryDependencies += "com.azavea" %% "scaliper" % "0.5.0-e9d4266"
 
 Where in the above case, `e9d4266` is the hash of a published snapshot of scaliper on bintray.
 
+Also, be sure to tell SBT not to execute tests in parallel, since we want to run benchmarks serially. You do this with the setting:
+
+```scala
+parallelExecution in Test := false
+```
+
 ## Example
 
 Say you have some function `thisTakesTime(arr: Array[Int]): Unit` that you'd like to benchmark, in a class Foo:
